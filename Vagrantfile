@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
   config.vm.define "dc" do |cfg|
-    cfg.vm.box = "windows_2012_r2"
+    cfg.vm.box = "devopsgroup-io/windows_server-2012r2-standard-amd64-nocm"
     cfg.vm.hostname = "dc"
 
     # use the plaintext WinRM transport and force it to use basic authentication.
@@ -18,6 +18,9 @@ Vagrant.configure("2") do |config|
     cfg.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", auto_correct: true
     cfg.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
     cfg.vm.network :private_network, ip: "192.168.38.2", gateway: "192.168.38.1"
+
+    #Run plugin sysprep to avoid SID collisions - https://github.com/rgl/vagrant-windows-sysprep
+    config.vm.provision "windows-sysprep"
 
     cfg.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "192.168.38.2"
     cfg.vm.provision "shell", path: "scripts/provision.ps1", privileged: false
@@ -51,6 +54,9 @@ Vagrant.configure("2") do |config|
     cfg.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
     cfg.vm.network :private_network, ip: "192.168.38.3", gateway: "192.168.38.1", dns: "192.168.38.2"
 
+    #Run plugin sysprep to avoid SID collisions - https://github.com/rgl/vagrant-windows-sysprep
+    config.vm.provision "windows-sysprep"
+
     cfg.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "-ip 192.168.38.3 -dns 192.168.38.2"
     cfg.vm.provision "shell", path: "scripts/provision.ps1", privileged: false
     cfg.vm.provision "reload"
@@ -77,6 +83,9 @@ Vagrant.configure("2") do |config|
     cfg.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
     cfg.vm.network :forwarded_port, guest: 80, host: 8080, id: "http", auto_correct: true
     cfg.vm.network :private_network, ip: "192.168.38.4", gateway: "192.168.38.1", dns: "192.168.38.2"
+
+    #Run plugin sysprep to avoid SID collisions - https://github.com/rgl/vagrant-windows-sysprep
+    config.vm.provision "windows-sysprep"
 
     cfg.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "-ip 192.168.38.4 -dns 192.168.38.2"
     cfg.vm.provision "shell", path: "scripts/provision.ps1", privileged: false
@@ -107,6 +116,9 @@ Vagrant.configure("2") do |config|
     cfg.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
     cfg.vm.network :private_network, ip: "192.168.38.9", gateway: "192.168.38.1"
 
+    #Run plugin sysprep to avoid SID collisions - https://github.com/rgl/vagrant-windows-sysprep
+    config.vm.provision "windows-sysprep"
+
     cfg.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "-ip 192.168.38.9 -dns 192.168.38.2"
     cfg.vm.provision "shell", path: "scripts/provision.ps1", privileged: false
     cfg.vm.provision "reload"
@@ -132,6 +144,9 @@ Vagrant.configure("2") do |config|
     cfg.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", auto_correct: true
     cfg.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
     cfg.vm.network :private_network, ip: "192.168.38.15", gateway: "192.168.38.1"
+
+    #Run plugin sysprep to avoid SID collisions - https://github.com/rgl/vagrant-windows-sysprep
+    config.vm.provision "windows-sysprep"
 
     cfg.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "-ip 192.168.38.15 -dns 192.168.38.2"
     cfg.vm.provision "shell", path: "scripts/provision.ps1", privileged: false

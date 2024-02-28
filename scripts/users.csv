@@ -1,3 +1,11 @@
-SamAccountName;GivenName;Surname;Name;Password
-mike.hammer;Mike;Hammer;Mike Hammer;Pa$sw0rd
-john.franklin;John;Franklin;John Franklin;Pa$sw0rd
+SamAccountName;GivenName;Surname;Name;Password;EmailAddress
+mike.hammer;Mike;Hammer;Mike Hammer;Pa$sw0rd;m.hammer@example.net
+john.franklin;John;Franklin;John Franklin;Pa$sw0rd;j.franklin@example.net
+gert.sony;Gert;Sony;Gert Sony;Pa$sw0rd;g.sony@example.net
+beorge.gurns;Gurns;Beorge;Pa$sw0rd;b.gurns@example.net
+george.learns;Learns;George;Pa$sw0rd;g.learns@example.net
+sally.turn;Turn;Sally;Pa$sw0rd;s.turns@example.net
+heather.smiley;Smiley;Heather;Pa$sw0rd;h.smiley@example.net
+casey.broome;Casey;Broome;Pa$sw0rd;c.broome@example.net
+brad.pitts;Pitts;Brad;Pa$sw0rd;b.pitts@example.net
+ip.daily;Daily;Ip;Pa$sw0rd;i.daily@example.net

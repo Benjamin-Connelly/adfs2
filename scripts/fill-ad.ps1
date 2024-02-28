@@ -11,8 +11,9 @@ NEW-ADOrganizationalUnit -name "Locations"
 NEW-ADOrganizationalUnit -name "HeadQuarter" -path "OU=Locations,DC=windomain,DC=local"
 NEW-ADOrganizationalUnit -name "Users" -path "OU=HeadQuarter,OU=Locations,DC=windomain,DC=local"
 
-Import-CSV -delimiter ";" c:\vagrant\scripts\users.csv | foreach {
-  New-ADUser -SamAccountName $_.SamAccountName -GivenName $_.GivenName -Surname $_.Surname -Name $_.Name `
+Import-CSV -delimiter ";" c:\vagrant\scripts\users.csv | ForEach-Object {
+  New-ADUser -SamAccountName $_.SamAccountName -GivenName $_.GivenName -Surname $_.Surname -Name $_.Name -EmailAddress $_.EmailAddress `
+  
              -Path "OU=Users,OU=HeadQuarter,OU=Locations,DC=windomain,DC=local" `
              -AccountPassword (ConvertTo-SecureString -AsPlainText $_.Password -Force) -Enabled $true
 }
@@ -25,4 +26,3 @@ Add-ADGroupMember -Identity SecurePrinting -Member CostCenter-125
 
 Add-ADGroupMember -Identity CostCenter-125 -Member mike.hammer
 Add-ADGroupMember -Identity CostCenter-123 -Member john.franklin
-
